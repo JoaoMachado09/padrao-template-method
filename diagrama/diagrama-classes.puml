@@ -1,0 +1,49 @@
+@startuml diagrama-classes
+title Template Method - Folha de Pagamento
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+  ArrowColor #333333
+}
+hide empty members
+abstract class Funcionario {
+  - matricula : int
+  - nome : String
+  - salarioBase : float
+  + getMatricula() : int
+  + setMatricula(matricula : int)
+  + getNome() : String
+  + setNome(nome : String)
+  + getSalarioBase() : float
+  + setSalarioBase(salarioBase : float)
+  + {abstract} calcularBeneficio() : float
+  + {abstract} calcularDesconto() : float
+  + calcularSalarioLiquido() : float
+  + getTipo() : String
+  + getContracheque() : String
+}
+note right of Funcionario::calcularSalarioLiquido
+  Template Method:
+  salarioBase + calcularBeneficio() - calcularDesconto()
+end note
+class FuncionarioCLT {
+  + calcularBeneficio() : float
+  + calcularDesconto() : float
+  + getTipo() : String
+}
+class FuncionarioEstagiario {
+  + calcularBeneficio() : float
+  + calcularDesconto() : float
+  + getTipo() : String
+}
+class FuncionarioPJ {
+  + calcularBeneficio() : float
+  + calcularDesconto() : float
+}
+Funcionario <|-- FuncionarioCLT
+Funcionario <|-- FuncionarioEstagiario
+Funcionario <|-- FuncionarioPJ
+@enduml
